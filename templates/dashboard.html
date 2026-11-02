@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}Candidate workspace | TalentLens AI{% endblock %}
+{% block content %}
+<section class="dash-heading"><div><div class="eyebrow">CANDIDATE WORKSPACE</div><h1>Resume <span>parser</span></h1><p>Enter candidate details, upload a resume and extract structured information.</p></div><div class="user-pill"><span class="user-dot">{{ session.get('name','U')[:1]|upper }}</span><div><b>{{ session.get('name') }}</b><small>Signed in</small></div></div></section>
+<section class="dashboard-grid">
+<div class="form-card"><div class="card-heading"><span class="step">01</span><div><h2>Candidate information</h2><p>Fill in the details below.</p></div></div>
+<form method="post" enctype="multipart/form-data" id="resumeForm">
+<label>Candidate full name <em>*</em></label><input name="candidate_name" value="{{ candidate.get('candidate_name','') }}" placeholder="Enter candidate name" required>
+<label>Candidate email <small>(optional)</small></label><input name="candidate_email" type="email" value="{{ candidate.get('candidate_email','') }}" placeholder="candidate@example.com">
+<label>Current qualification <em>*</em></label><select name="qualification" required><option value="">Select qualification</option>{% for q in ['Secondary / Class 10','Higher Secondary / Class 12','Diploma','B.A.','B.Sc.','B.Com.','B.Tech / B.E.','BCA','M.A.','M.Sc.','M.Com.','M.Tech / M.E.','MCA','MBA','Ph.D.','Other'] %}<option value="{{ q }}" {% if candidate.get('qualification')==q %}selected{% endif %}>{{ q }}</option>{% endfor %}</select>
+<label>Candidate type <em>*</em></label><div class="radio-cards"><label class="radio-card"><input type="radio" name="status" value="fresher" {% if candidate.get('status','fresher')=='fresher' %}checked{% endif %} onchange="toggleExperience()"><span><b>Fresher</b><small>Starting career</small></span></label><label class="radio-card"><input type="radio" name="status" value="experienced" {% if candidate.get('status')=='experienced' %}checked{% endif %} onchange="toggleExperience()"><span><b>Experienced</b><small>Has work experience</small></span></label></div>
+<div id="experienceWrap"><label>Experience details <small>(optional)</small></label><input name="experience" value="{{ candidate.get('experience','') }}" placeholder="e.g. 2 years as a Python developer"></div>
+<label>Upload resume <em>*</em></label><label class="upload-box" for="resume"><span class="upload-icon">↑</span><b>Choose a resume file</b><small>PDF, JPG or JPEG · Maximum 8 MB</small><span id="fileName" class="file-name">No file selected</span><input id="resume" name="resume" type="file" accept=".pdf,.jpg,.jpeg,application/pdf,image/jpeg" required></label>
+<button class="button primary full" type="submit">Parse resume <span>→</span></button><p class="privacy-note">Your uploaded file is stored in this local project folder. Use sample or consented resumes.</p>
+</form></div>
+<div class="tips-card"><div class="tips-symbol">✦</div><h2>Parsing checklist</h2><p>For best results, upload a clear, text-based resume.</p><div class="tip"><span>1</span><div><b>Clear formatting</b><small>Simple text layouts are easier to read.</small></div></div><div class="tip"><span>2</span><div><b>Supported file</b><small>PDF, JPG and JPEG are accepted.</small></div></div><div class="tip"><span>3</span><div><b>Review extracted data</b><small>Always verify information before using it.</small></div></div><div class="notice"><b>Note</b><p>This is a student demo. Name and skill extraction may not be perfect; scanned images need OCR.</p></div></div>
+</section>
+{% if result %}
+<section class="results-card" id="results"><div class="results-title"><div><div class="eyebrow">PARSING COMPLETE</div><h2>Extracted candidate details</h2></div><span class="status-pill">✓ Results ready</span></div>
+<div class="result-grid">{% for key,value in result.items() if key != 'Extracted text' %}<div class="result-item"><small>{{ key }}</small><b>{{ value }}</b></div>{% endfor %}</div>
+<div class="extracted-text"><h3>Extracted resume text preview</h3><pre>{{ result.get('Extracted text','') }}</pre></div>
+<div class="result-actions"><a class="button primary" href="{{ url_for('download_pdf') }}">Download result as PDF ↓</a></div>
+</section>
+{% endif %}
+<script>
+function toggleExperience(){
+ const selected=document.querySelector('input[name="status"]:checked');
+ document.getElementById('experienceWrap').style.display=(selected && selected.value==='experienced')?'block':'none';
+}
+toggleExperience();
+document.getElementById('resume').addEventListener('change',function(){document.getElementById('fileName').textContent=this.files.length?this.files[0].name:'No file selected';});
+</script>
+{% endblock %}

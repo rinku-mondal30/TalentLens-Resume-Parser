@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Log in | TalentLens AI{% endblock %}
+{% block content %}
+<section class="auth-layout"><div class="auth-side"><div class="eyebrow">WELCOME BACK</div><h1>Your candidate<br><span>workspace awaits.</span></h1><p>Log in to continue parsing resumes and reviewing structured candidate details.</p><div class="side-points"><span>✓ Upload PDF, JPG or JPEG</span><span>✓ Extract skills and education</span><span>✓ Review results in one dashboard</span></div></div>
+<div class="auth-card"><div class="auth-icon">↗</div><h2>Welcome back</h2><p class="muted">Log in to your TalentLens account.</p>
+<form method="post">
+<label>Email address</label><input name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+<label>Password</label><input name="password" type="password" placeholder="Enter your password" required autocomplete="current-password">
+<button class="button primary full" type="submit">Log in securely →</button>
+</form><p class="auth-switch">New to TalentLens? <a href="{{ url_for('register') }}">Create an account</a></p></div></section>
+{% endblock %}

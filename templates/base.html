@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TalentLens AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">T</span> TalentLens<span class="brand-ai">AI</span></a>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    {% if session.get('user_id') %}
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <span class="nav-user">Hi, {{ session.get('name', 'User') }}</span>
+      <a class="nav-cta" href="{{ url_for('logout') }}">Log out</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Log in</a>
+      <a class="nav-cta" href="{{ url_for('register') }}">Get started</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="page">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="flash-wrap">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer><span>TalentLens AI</span><span>Resume parsing demo · Built with Python & spaCy</span></footer>
+</body>
+</html>

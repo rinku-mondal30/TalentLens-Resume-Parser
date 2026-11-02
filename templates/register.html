@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Create account | TalentLens AI{% endblock %}
+{% block content %}
+<section class="auth-layout"><div class="auth-side"><div class="eyebrow">YOUR SMART WORKSPACE</div><h1>Start building<br><span>better shortlists.</span></h1><p>Create an account to upload resumes and view extracted candidate information.</p><div class="side-points"><span>✓ Simple candidate intake</span><span>✓ PDF and image uploads</span><span>✓ Private account login</span></div></div>
+<div class="auth-card"><div class="auth-icon">✦</div><h2>Create your account</h2><p class="muted">Enter your details to get started.</p>
+<form method="post">
+<label>Full name</label><input name="name" placeholder="e.g. Mali Sharma" required autocomplete="name">
+<label>Email address</label><input name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+<label>Password <small>(minimum 8 characters)</small></label><input name="password" type="password" minlength="8" placeholder="Create a strong password" required autocomplete="new-password">
+<button class="button primary full" type="submit">Create account →</button>
+</form><p class="auth-switch">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></div></section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% block title %}TalentLens AI | Smart Resume Parsing{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="pulse"></span> AI-POWERED RECRUITMENT TOOL</div>
+    <h1>Every resume.<br><span>One clear picture.</span></h1>
+    <p class="hero-text">Turn resumes into structured candidate profiles in seconds. Extract contact details, skills and education with a clean, simple workflow.</p>
+    <div class="hero-actions"><a class="button primary" href="{{ url_for('register') }}">Get started <span>→</span></a><a class="button secondary" href="{{ url_for('login') }}">I already have an account</a></div>
+    <div class="trust-row"><span>✓ PDF & image support</span><span>✓ Structured results</span><span>✓ CSV-ready workflow</span></div>
+  </div>
+  <div class="hero-art">
+    <div class="orb orb-one"></div><div class="orb orb-two"></div>
+    <div class="mock-window">
+      <div class="mock-top"><div class="dots"><i></i><i></i><i></i></div><span>Candidate insights</span><span class="live">LIVE DEMO</span></div>
+      <div class="mock-profile"><div class="avatar">AS</div><div><b>Alex Smith</b><small>Data Analyst · Candidate profile</small></div><span class="check">✓</span></div>
+      <div class="mock-stats"><div><small>SKILLS FOUND</small><b>08</b></div><div><small>EDUCATION</small><b>02</b></div><div><small>CONTACT</small><b>Ready</b></div></div>
+      <div class="mock-label">MATCHED SKILLS</div><div class="chips"><span>Python</span><span>SQL</span><span>Data Analysis</span><span>Excel</span><span>+ more</span></div>
+      <div class="mock-progress"><span></span></div><div class="mock-foot"><span>Text extraction complete</span><b>✓ Parsed</b></div>
+    </div>
+    <div class="floating-card"><span class="float-icon">✦</span><div><b>Smart extraction</b><small>Less manual data entry</small></div></div>
+  </div>
+</section>
+<section class="feature-row">
+  <div><span class="feature-icon">⌕</span><b>Fast extraction</b><p>Find useful details from resume files.</p></div>
+  <div><span class="feature-icon">▤</span><b>Structured profiles</b><p>View candidate details in one place.</p></div>
+  <div><span class="feature-icon">↗</span><b>Simple workflow</b><p>Upload, review and export results.</p></div>
+</section>
+<section class="bottom-cta"><div><h2>Ready to simplify resume review?</h2><p>Create an account to open your candidate workspace.</p></div><a class="button light" href="{{ url_for('register') }}">Create free account →</a></section>
+{% endblock %}
