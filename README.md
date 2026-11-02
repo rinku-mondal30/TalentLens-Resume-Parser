@@ -1,47 +1,168 @@
-# TalentLens AI — Resume Parser
+# TalentLens AI – Resume Parser
+
+An AI-powered Resume Parser built using **Python, Flask, spaCy NLP, and Machine Learning concepts**. The application extracts important information from resumes and generates a structured PDF report.
+
+## Features
+
+- User registration and login system
+- Separate dashboard for resume processing
+- Resume upload and text extraction
+- NLP-based information extraction using spaCy
+- Candidate name and contact information detection
+- Skills and education keyword extraction
+- Fresher and experienced candidate selection
+- Download parsed resume results as PDF
+- Responsive and user-friendly interface
+
+## Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Python | Backend programming |
+| Flask | Web application framework |
+| spaCy | Natural Language Processing |
+| PyMuPDF | PDF text extraction |
+| Pytesseract | OCR for image resumes |
+| HTML | Web page structure |
+| CSS | Website styling |
+| SQLite | User data storage |
+
+## Project Structure
+
+```text
+TalentLens_Resume_Parser_PDF_Only/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── static/
+│   └── style.css
+│
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   └── dashboard.html
+│
+├── uploads/       # Uploaded resumes (created when needed)
+└── users.db       # Database (created when needed)
+```
 
 ## Requirements
+
 - Python 3.10–3.12 recommended
+- Git
+- VS Code (recommended)
 - Internet connection for installing packages and downloading the spaCy model
-- Tesseract OCR is needed for JPG/JPEG image resumes. PDF text extraction works without it.
+- Tesseract OCR for JPG/JPEG image resume processing
 
-## Setup (Windows)
-1. Extract the ZIP folder.
-2. Open Command Prompt or VS Code terminal inside `resume_parser_project`.
-3. Create a virtual environment:
-   `py -m venv .venv`
-4. Activate it:
-   `.venv\Scripts\activate`
-5. Install packages:
-   `python -m pip install --upgrade pip`
-   `pip install -r requirements.txt`
-6. Download the English spaCy model:
-   `python -m spacy download en_core_web_sm`
-7. Start the app:
-   `python app.py`
-8. Open `http://127.0.0.1:5000` in your browser.
-9. Click Get started, create an account with your name, email, and password (8+ characters), then log in.
+## Installation and Setup
 
-## JPG/JPEG OCR setup (Windows)
-1. Install Tesseract OCR for Windows from its official UB Mannheim installer page: https://github.com/UB-Mannheim/tesseract/wiki
-2. If Python cannot find it, add the Tesseract install folder to PATH or add this line near the imports in `app.py` (change the path if needed):
-   `pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"`
-3. Restart the terminal and app.
+### Step 1: Clone the repository
 
-## Project structure
-- `app.py` — Flask routes, login/register/logout, text extraction and NLP parsing
-- `templates/` — HTML pages
-- `static/style.css` — responsive professional design
-- `uploads/` — uploaded resumes
-- `users.db` — created automatically for account storage
+```bash
+git clone https://github.com/rinku-mondal30/TalentLens-Resume-Parser.git
+```
 
-## Notes
-- Passwords are stored as hashes, not plain text.
-- This is a local student project, not a production HR system. Add CSRF protection, stronger session configuration, file scanning, access controls, and retention rules before public deployment.
-- Name detection and skills matching are basic demonstrations; verify extracted information manually.
+### Step 2: Open the project folder
+
+```bash
+cd TalentLens-Resume-Parser
+```
+
+### Step 3: Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+### Step 4: Activate the virtual environment
+
+For Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### Step 5: Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### Step 6: Download the spaCy English model
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
+### Step 7: Run the application
+
+```bash
+python app.py
+```
+
+### Step 8: Open the application
+
+Open your browser and visit:
+
+http://127.0.0.1:5000
+
+Register an account, log in, select your qualification status, and upload git add README.mda resume.
+
+## Tesseract OCR Setup
+
+Tesseract OCR is required for extracting text from JPG/JPEG image resumes.
+
+1. Download the Windows installer from the [Tesseract OCR repository](https://github.com/UB-Mannheim/tesseract/wiki).
+2. Install Tesseract OCR.
+3. If Python cannot locate it, configure the executable path in your application:
+
+```python
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+```
+
+4. Restart your terminal and Flask application.
+
+PDF text extraction does not require Tesseract when the PDF contains extractable text.
+
+## Download Parsed Results
+
+After uploading a resume:
+
+1. Open the dashboard.
+2. View the extracted candidate information.
+3. Review the detected skills, education, and experience details.
+4. Click **Download Result as PDF** to download the parsed report.
+
+## Future Improvements
+
+- Advanced Named Entity Recognition (NER)
+- Improved skills classification
+- Resume ranking and job matching
+- Support for additional resume formats
+- Cloud deployment
+- Admin dashboard and analytics
+
+## Important Notes
+
+- Do not upload passwords, secret keys, database files, or private resumes to a public GitHub repository.
+- Passwords should be stored securely as hashes.
+- This project is an academic demonstration, not a production-ready HR system.
+- Extracted information should be manually verified.
 - Only upload resumes you have permission to process.
-- Stop the local server with `Ctrl+C` in the terminal.
 
+## Author
 
-### Download parsed results as PDF
-After uploading a resume and viewing the parsed result on the dashboard, click **Download result as PDF**. The report includes candidate details, detected contact information, skills, education keywords, qualification, experience, and the uploaded filename. CSV download remains available too.
+**Rinku Mondal**
+
+GitHub: [rinku-mondal30](https://github.com/rinku-mondal30)
+
+## License
+
+This project is intended for educational and learning purposes.
+
